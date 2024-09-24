@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download Video</title>
+</head>
+<body>
+    <!-- Form to input two numbers -->
+    <form id="downloadForm">
+        <label for="link">Video URL:</label>
+        <input type="text" id="link" name="link" required>
+        <br>
+        <button type="submit">Download</button>
+        
+        
+       
+    </form>
+
+    
+
+    <script>
+        document.getElementById('downloadForm').addEventListener('submit', async function(event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            // Get form data using FormData
+            const formData = new FormData(event.target);
+            const response = await fetch('http://localhost:8000/download', {
+                method:'POST',
+                body: formData
+            });
+               
+
+            if (response.ok) {
+                const result= await response.json();
+                console.log('Response:', result);
+            }else{
+                console.error('Error:', response.statusText);
+
+            }
+
+
+        });
+    </script>
+</body>
+</html>
+ 
